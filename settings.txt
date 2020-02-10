@@ -1,0 +1,4 @@
+[config]
+BROWSER = firefox
+BROWSER_PATH = /home/naveen/.mozilla/firefox/w5lpjsgn.default
+PAGE = https://web.whatsapp.com/
