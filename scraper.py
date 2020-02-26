@@ -87,22 +87,26 @@ def find_images_and_download_with_time(driver, chat_text):
     images_list = []
     #class name of images inside chat
     for img_element in chat_text.find_elements_by_class_name("_18vxA"):
-        driver.execute_script("arguments[0].scrollIntoView()", img_element)
-        img_element.click()
         try:
+            driver.execute_script("arguments[0].scrollIntoView()", img_element)
             img_element.click()
+            try:
+                img_element.click()
 
+            except:
+                pass
+        #classname of images after enlarged
+            img = driver.find_element_by_xpath("/html/body/div[1]/div/span[3]/div/div/div[2]/div[2]/div[2]/div/div/img")
+            close_button = driver.find_element_by_xpath("//div[@role='button' and @title='Close']")
+            close_button.click()
+            images_list.append(img.screenshot_as_base64)
         except:
             pass
-        #classname of images after enlarged
-        img = driver.find_element_by_xpath("/html/body/div[1]/div/span[3]/div/div/div[2]/div[2]/div[2]/div/div/img")
-        close_button = driver.find_element_by_xpath("//div[@role='button' and @title='Close']")
-        close_button.click()
-        images_list.append(img.screenshot_as_base64)
+
     return images_list
 
-def fetch_msg_for_chatset(driver, settings):
 
+def fetch_msg_for_chatset(driver, settings):
     element = driver.find_element_by_xpath("//div[@tabindex='-1' and @data-tab='3']")
     print(element)
     all_chat_names = []
@@ -125,7 +129,10 @@ def fetch_msg_for_chatset(driver, settings):
         print(chat_dict)
         print("parsing element:", ele.text)
         #driver.execute_script("arguments[0].scrollIntoView()", ele)
-        ele.click()
+        try:
+            ele.click()
+        except:
+            continue
         chat_window = driver.find_element_by_class_name("_1_keJ")
         chat_text = scroll_till_full_two_days_available(driver, chat_window)
         all_images = find_images_and_download_with_time(driver, chat_text)
@@ -138,8 +145,6 @@ def fetch_msg_for_chatset(driver, settings):
         current_elements = element.find_elements_by_class_name("X7YrQ")
     return chat_dict
 
-
-
     #path = get_path_hierarchy(test_ele, [])
     #print(path)
 
@@ -150,7 +155,6 @@ def fetch_msg_for_chatset(driver, settings):
 
 def scroll_tester(driver, settings):
     left_side_pane = driver.find_element_by_xpath("//div[@id='pane-side']")
-
 
 
 def search_chatter(driver, settings):
