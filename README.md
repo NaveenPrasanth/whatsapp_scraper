@@ -6,12 +6,12 @@ This script will parse whatsapp chats and parse the text chats for the last two 
 Open firefox and login into whatsapp web using your phone so that your login profile will be saved. It will be in the path /home/<username>/.mozilla/firefox/<hashkey>.default
 Copy and paste this path in the settings.txt file
 After that you can start the script using
-```bash python scraper.py```
+``` python scraper.py```
 
 
 ## Prerequisities
 Install the requirements using
-```bash sudo pip install -r requirements.txt```
+``` sudo pip install -r requirements.txt```
 
 Inspiration and base template credits:
 [JMGama](https://github.com/JMGama/WhatsApp-Scraping)
